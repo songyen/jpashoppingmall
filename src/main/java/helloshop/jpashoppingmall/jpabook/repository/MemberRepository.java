@@ -2,6 +2,7 @@ package helloshop.jpashoppingmall.jpabook.repository;
 
 
 import helloshop.jpashoppingmall.jpabook.domain.Member;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -9,10 +10,9 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
-    @PersistenceContext
-    private EntityManager em;
-
+    private final EntityManager em;
 
     public Member save(Member member){
         em.persist(member);

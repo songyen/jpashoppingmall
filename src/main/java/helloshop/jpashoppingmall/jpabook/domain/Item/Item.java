@@ -24,10 +24,6 @@ public abstract class Item {
     @JoinColumn(name="category_id")
     private Category category;
 
-    @ManyToOne
-    @JoinColumn(name="saler_id")
-    private Saler saler;
-
     /*
     * stock증가
     */
