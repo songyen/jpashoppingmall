@@ -15,7 +15,9 @@ public class Member {
     private Long id;
 
     @Column(unique = true)
-    private String name;
+    private String email;
+    @Column
+    private String passWd;
     @Embedded
     private Address address;
 

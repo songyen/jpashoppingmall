@@ -4,7 +4,6 @@ import helloshop.jpashoppingmall.jpabook.domain.Item.Book;
 import helloshop.jpashoppingmall.jpabook.domain.Item.Item;
 import helloshop.jpashoppingmall.jpabook.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
-import org.junit.Test;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
