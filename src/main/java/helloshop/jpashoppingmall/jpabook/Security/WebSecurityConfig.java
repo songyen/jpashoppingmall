@@ -1,6 +1,7 @@
 package helloshop.jpashoppingmall.jpabook.Security;
 
 import helloshop.jpashoppingmall.jpabook.Security.JWT.JwtAuthenticationFilter;
+import helloshop.jpashoppingmall.jpabook.Security.JWT.JwtAuthorizationFilter;
 import helloshop.jpashoppingmall.jpabook.Security.exception.AuthenticationException;
 import helloshop.jpashoppingmall.jpabook.Security.exception.AuthorizationException;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/**").permitAll()
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager(),memberRepository))
+                .addFilter(new JwtAuthorizationFilter(authenticationManager(),memberRepository))
                 .httpBasic().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new AuthenticationException())

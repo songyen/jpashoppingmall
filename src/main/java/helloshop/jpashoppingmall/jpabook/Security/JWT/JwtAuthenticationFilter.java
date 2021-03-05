@@ -3,6 +3,7 @@ package helloshop.jpashoppingmall.jpabook.Security.JWT;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import helloshop.jpashoppingmall.jpabook.Security.principal.PrincipalDetails;
 import helloshop.jpashoppingmall.jpabook.domain.Member;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.*;

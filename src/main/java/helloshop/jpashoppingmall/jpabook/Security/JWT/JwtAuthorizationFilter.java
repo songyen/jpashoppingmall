@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
+import helloshop.jpashoppingmall.jpabook.Security.principal.PrincipalDetails;
 import helloshop.jpashoppingmall.jpabook.domain.Member;
 import helloshop.jpashoppingmall.jpabook.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
