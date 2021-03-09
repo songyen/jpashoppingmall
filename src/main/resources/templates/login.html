@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
+<title>Sign In</title>
+<body>
+<div class="container">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <form action="/login" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <p>
+            <label th:for="Email">Email</label>
+            <input type="text" id="Email" name="Email" class="form-control" placeholder="Email" required autofocus>
+        </p>
+        <p>
+            <label for="password">password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="password" required>
+        </p>
+        <input name="_csrf" type="hidden" value="7749bebe-3123-40cc-ac4a-777893ce6186" />
+        <button class="btn btn-primary" type="submit">Sign in</button>
+    </form>
+    <br/>
+    <div th:replace="fragments/footer :: footer" />
+</div>
+</body>
+</html>

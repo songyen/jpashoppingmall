@@ -12,13 +12,27 @@
     <form role="form" action="/members/new" th:object="${memberForm}"
           method="post">
         <div class="form-group">
-            <label th:for="name">이름</label>
-            <input type="text" th:field="*{name}" class="form-control"
-                   placeholder="이름을 입력하세요"
-                   th:class="${#fields.hasErrors('name')}? 'form-control
+            <label th:for="name">이메일</label>
+            <input type="text" th:field="*{email}" class="form-control"
+                   placeholder="이메일을 입력하세요"
+                   th:class="${#fields.hasErrors('email')}? 'form-control
 fieldError' : 'form-control'">
-            <p th:if="${#fields.hasErrors('name')}"
-               th:errors="*{name}">Incorrect date</p>
+            <p th:if="${#fields.hasErrors('email')}"
+               th:errors="*{email}">Incorrect date</p>
+        </div>
+        <div class="form-group">
+            <label th:for="passwd">비밀번호</label>
+            <input type="text" th:field="*{passwd}" class="form-control"
+                   placeholder="비밀번호를 입력하세요">
+        </div>
+        <div class="form-group">
+            <label th:for="authority">권한</label>
+            <select th:field="*{authority}" class="form-control">
+                <option th:each="authority : ${T(helloshop.jpashoppingmall.jpabook.domain.Authority).values()}"
+                        th:value="${authority}"
+                        th:text="${authority}">
+                </option>
+            </select>
         </div>
         <div class="form-group">
             <label th:for="city">도시</label>

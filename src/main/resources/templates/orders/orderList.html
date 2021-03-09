@@ -15,7 +15,7 @@
                         <option value="">주문상태</option>
                         <option th:each="status : ${T(helloshop.jpashoppingmall.jpabook.domain.OrderStatus).values()}"
                                 th:value="${status}"
-                                th:text="${status}">option
+                                th:text="${status}">
                         </option>
                     </select>
                 </div>
