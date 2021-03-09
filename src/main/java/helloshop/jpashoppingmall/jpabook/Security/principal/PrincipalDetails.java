@@ -18,7 +18,7 @@ public class PrincipalDetails implements UserDetails {
         authorities.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
-                return member.getAuthority();
+                return member.getAuthority().toString();
             }
         });
         return authorities;

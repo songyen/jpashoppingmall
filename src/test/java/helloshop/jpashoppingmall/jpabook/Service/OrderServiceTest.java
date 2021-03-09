@@ -57,7 +57,7 @@ public class OrderServiceTest {
         Order order = orderService.order(member.getId(),item.getId(),orderCount);
 
         //when
-        orderService.cancleOrder(order.getId());
+        orderService.cancelOrder(order.getId());
         //then
         Assertions.assertEquals(OrderStatus.CANCLE, order.getStatus(),"주문 취소시 상태는 CANCEL이다.");
         Assertions.assertEquals(10, item.getStockQuantity(),"주문이 취소된 상품은 그만큼 재고가 증가해야 한다.");

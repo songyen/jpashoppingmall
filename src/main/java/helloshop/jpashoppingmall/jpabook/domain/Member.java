@@ -18,8 +18,10 @@ public class Member {
     private String email;
     @Column
     private String passWd;
-    @Column
-    private String authority;
+
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
     @Embedded
     private Address address;
 

@@ -29,7 +29,7 @@ public class OrderController {
         model.addAttribute("members",members);
         model.addAttribute("items",items);
 
-        return "orders/orderForm";
+        return "/orders/orderForm";
     }
 
     @PostMapping("/order")
@@ -45,12 +45,12 @@ public class OrderController {
     public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model){
         List<Order> orders = orderService.findOrders(orderSearch);
         model.addAttribute("orders",orders);
-        return "orders/orderList";
+        return "/orders/orderList";
     }
 
     @PostMapping("/order/{orderID}/cancel")
-    public String cacnelOrder(@PathVariable("orderId") Long orderId){
-        orderService.cancleOrder(orderId);
+    public String cancelOrder(@PathVariable("orderId") Long orderId){
+        orderService.cancelOrder(orderId);
         return "redirect:/orders";
     }
 }
