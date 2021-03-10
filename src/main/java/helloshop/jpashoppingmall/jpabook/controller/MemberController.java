@@ -35,7 +35,7 @@ public class MemberController {
 
         Member member = new Member();
         member.setEmail(form.getEmail());
-        member.setPassWd(bCryptPasswordEncoder.encode(form.getPasswd()));
+        member.setPassword(bCryptPasswordEncoder.encode(form.getPasswd()));
         member.setAuthority(form.getAuthority());
         member.setAddress(address);
 

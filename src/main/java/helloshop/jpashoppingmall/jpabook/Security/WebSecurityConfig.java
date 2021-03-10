@@ -1,19 +1,24 @@
 package helloshop.jpashoppingmall.jpabook.Security;
 
 import helloshop.jpashoppingmall.jpabook.Security.JWT.JwtAuthenticationFilter;
-import helloshop.jpashoppingmall.jpabook.Security.JWT.JwtAuthorizationFilter;
+import helloshop.jpashoppingmall.jpabook.Security.JWT.JwtFilter;
+import helloshop.jpashoppingmall.jpabook.Security.JWT.JwtTokenProvider;
 import helloshop.jpashoppingmall.jpabook.Security.exception.AuthenticationException;
 import helloshop.jpashoppingmall.jpabook.Security.exception.AuthorizationException;
 import helloshop.jpashoppingmall.jpabook.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.firewall.DefaultHttpFirewall;
+import org.springframework.security.web.firewall.HttpFirewall;
 
 
 @Configuration
@@ -22,16 +27,31 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final MemberRepository memberRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
+    // 암호화에 필요한 PasswordEncoder 를 Bean 등록합니다.
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+    // authenticationManager를 Bean 등록합니다.
+    @Bean
     @Override
-    public void configure(WebSecurity web) { // 4
-        web.ignoring().antMatchers("/resources/**");
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
+
+    @Bean
+    public HttpFirewall defaultHttpFirewall() {
+        return new DefaultHttpFirewall();  //더블슬래시 허용
+    }
+
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers("/resources/**");
+        web.httpFirewall(defaultHttpFirewall());  //더블슬래시 허용용
+   }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,19 +64,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("email")
                     .passwordParameter("password")
                     .defaultSuccessUrl("/home")
-                .and()
 //                .logout()
 //                    .logoutSuccessUrl("/home")
 //                    .invalidateHttpSession(true)
-//                .and()
-                .authorizeRequests() //요청에 대한 사용권한 체크
-                    .antMatchers("/**").permitAll()
-//                    .antMatchers("/members").hasRole("ADMIN")
-//                    .antMatchers("/items/new","items/{itemId}/edit").hasRole("SELLER")
-//                    .antMatchers("/items","/order/**","/orders").hasRole("USER")
                 .and()
-                .addFilter(new JwtAuthenticationFilter(authenticationManager(),memberRepository))
-                .addFilter(new JwtAuthorizationFilter(authenticationManager(),memberRepository))
+                .authorizeRequests() //요청에 대한 사용권한 체크
+                    .antMatchers("/home","/members/new","/login","/orders").permitAll()
+                    .antMatchers("/members","/items/new").hasRole("ADMIN")
+                    .antMatchers("/order/**","/items/**").hasRole("USER")
+                .and()
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
+                        UsernamePasswordAuthenticationFilter.class) //JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter전에 넣는다다
+//               .addFilter(new JwtFilter(jwtTokenProvider))
                 .exceptionHandling()
                 .authenticationEntryPoint(new AuthenticationException())
                 .accessDeniedHandler(new AuthorizationException());

@@ -17,7 +17,7 @@ public class Member {
     @Column(unique = true)
     private String email;
     @Column
-    private String passWd;
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private Authority authority;
