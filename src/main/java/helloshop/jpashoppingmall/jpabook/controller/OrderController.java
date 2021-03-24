@@ -21,7 +21,7 @@ public class OrderController {
     private final MemberService memberService;
     private final ItemService itemService;
 
-    @GetMapping("/order")
+    @GetMapping("order")
     public String createForm(Model model){
         List<Member> members = memberService.findMembers();
         List<Item> items = itemService.findAll();
@@ -29,28 +29,28 @@ public class OrderController {
         model.addAttribute("members",members);
         model.addAttribute("items",items);
 
-        return "/orders/orderForm";
+        return "orders/orderForm";
     }
 
-    @PostMapping("/order")
+    @PostMapping("order")
     public String order(@RequestParam("memberId") Long memberId,
                         @RequestParam("itemId") Long itemId,
                         @RequestParam("count") int count){
         orderService.order(memberId,itemId,count);
 
-        return ("redirect:/orders");
+        return ("redirect:orders");
     }
 
-    @GetMapping("/orders")
+    @GetMapping("orders")
     public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model){
         List<Order> orders = orderService.findOrders(orderSearch);
         model.addAttribute("orders",orders);
-        return "/orders/orderList";
+        return "orders/orderList";
     }
 
-    @PostMapping("/order/{orderID}/cancel")
+    @PostMapping("order/{orderID}/cancel")
     public String cancelOrder(@PathVariable("orderId") Long orderId){
         orderService.cancelOrder(orderId);
-        return "redirect:/orders";
+        return "redirect:orders";
     }
 }

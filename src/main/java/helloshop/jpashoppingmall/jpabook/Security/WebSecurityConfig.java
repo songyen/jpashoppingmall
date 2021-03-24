@@ -1,15 +1,12 @@
 package helloshop.jpashoppingmall.jpabook.Security;
 
 import helloshop.jpashoppingmall.jpabook.Security.JWT.JwtAuthenticationFilter;
-import helloshop.jpashoppingmall.jpabook.Security.JWT.JwtFilter;
 import helloshop.jpashoppingmall.jpabook.Security.JWT.JwtTokenProvider;
 import helloshop.jpashoppingmall.jpabook.Security.exception.AuthenticationException;
 import helloshop.jpashoppingmall.jpabook.Security.exception.AuthorizationException;
-import helloshop.jpashoppingmall.jpabook.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -26,20 +23,12 @@ import org.springframework.security.web.firewall.HttpFirewall;
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final MemberRepository memberRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
     // 암호화에 필요한 PasswordEncoder 를 Bean 등록합니다.
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
-    }
-
-    // authenticationManager를 Bean 등록합니다.
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
     }
 
     @Bean
@@ -59,23 +48,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) //토큰 기반 인증이므로 세션 역시 사용안함
                 .and()
                 .httpBasic().disable()
-                .formLogin()
-                    .loginPage("/login").permitAll()
-                    .usernameParameter("email")
-                    .passwordParameter("password")
-                    .defaultSuccessUrl("/home")
+//                .formLogin()
+//                    .loginPage("/login").permitAll()
+//                    .usernameParameter("email")
+//                    .passwordParameter("password")
+//                    .defaultSuccessUrl("/home")
 //                .logout()
 //                    .logoutSuccessUrl("/home")
 //                    .invalidateHttpSession(true)
-                .and()
+//                .and()
                 .authorizeRequests() //요청에 대한 사용권한 체크
                     .antMatchers("/home","/members/new","/login","/orders").permitAll()
                     .antMatchers("/members","/items/new").hasRole("ADMIN")
                     .antMatchers("/order/**","/items/**").hasRole("USER")
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider),
-                        UsernamePasswordAuthenticationFilter.class) //JwtAuthenticationFilter를 UsernamePasswordAuthenticationFilter전에 넣는다다
-//               .addFilter(new JwtFilter(jwtTokenProvider))
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
                 .authenticationEntryPoint(new AuthenticationException())
                 .accessDeniedHandler(new AuthorizationException());

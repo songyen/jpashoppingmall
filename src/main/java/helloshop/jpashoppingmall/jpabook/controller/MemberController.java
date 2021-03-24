@@ -20,16 +20,16 @@ public class MemberController {
     private final MemberService memberService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @GetMapping("/members/new")
+    @GetMapping("members/new")
     public String createForm(Model model){
         model.addAttribute("memberForm",new MemberForm());
-        return "/members/createMemberForm";
+        return "members/createMemberForm";
     }
 
-    @PostMapping("/members/new")
+    @PostMapping("members/new")
     public String create(@Valid MemberForm form, BindingResult result){
         if(result.hasErrors()){
-            return "/members/createMemberForm";
+            return "members/createMemberForm";
         }
         Address address = new Address(form.getCity(), form.getStreet(),form.getZipcode());
 
@@ -40,13 +40,13 @@ public class MemberController {
         member.setAddress(address);
 
         memberService.join(member);
-        return "redirect:/";
+        return "redirect:home";
     }
 
-    @GetMapping("/members")
+    @GetMapping("members")
     public String list(Model model){
         List<Member> members = memberService.findMembers();
         model.addAttribute("members",members);
-        return "/members/memberList";
+        return "members/memberList";
     }
 }
