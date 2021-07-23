@@ -4,7 +4,7 @@
 ## 설계
 ### 도메인 설계
 
-<img width="472" alt="도메인설계" src="https://user-images.githubusercontent.com/76679463/126798299-7ecd4b27-cfd2-4155-8b27-9e423b948e46.PNG">
+<img width="1000" alt="도메인설계" src="https://user-images.githubusercontent.com/76679463/126798299-7ecd4b27-cfd2-4155-8b27-9e423b948e46.PNG">
 
 
 ## 개발 기능
