@@ -21,17 +21,17 @@ public class MemberServiceTest {
     @Test
     public void 회원가입() throws Exception{
         Member member = new Member();
-        member.setName("kim");
+        member.setEmail("test@shop.kr");
 
         assertEquals(member, memberService.join(member));
     }
     @Test
     public void 중복_회원_예외() throws Exception{
         Member member1 = new Member();
-        member1.setName("kim");
+        member1.setEmail("test@shop.kr");
 
         Member member2 = new Member();
-        member2.setName("kim");
+        member2.setEmail("test@shop.kr");
 
         memberService.join(member1);
         try {

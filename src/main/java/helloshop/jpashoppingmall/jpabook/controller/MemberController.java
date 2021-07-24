@@ -18,7 +18,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberController {
     private final MemberService memberService;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("members/new")
     public String createForm(Model model){
@@ -35,12 +34,10 @@ public class MemberController {
 
         Member member = new Member();
         member.setEmail(form.getEmail());
-        member.setPassword(bCryptPasswordEncoder.encode(form.getPasswd()));
-        member.setAuthority(form.getAuthority());
         member.setAddress(address);
 
         memberService.join(member);
-        return "redirect:home";
+        return "redirect:../";
     }
 
     @GetMapping("members")

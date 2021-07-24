@@ -13,14 +13,8 @@ public class Member {
     @Id @GeneratedValue
     @Column(name="member_id")
     private Long id;
-
     @Column(unique = true)
     private String email;
-    @Column
-    private String password;
-
-    @Enumerated(EnumType.STRING)
-    private Authority authority;
 
     @Embedded
     private Address address;
