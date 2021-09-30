@@ -23,14 +23,9 @@ public class HomeController {
     private final MemberService memberService;
     private final MemberRepository memberRepository;
 
-    @RequestMapping("/main")
+    @GetMapping("/main")
     public String main(){
         return "index";
-    }
-
-    @RequestMapping("/")
-    public String home(){
-        return "home";
     }
 
     @GetMapping("/signUp")
@@ -44,12 +39,11 @@ public class HomeController {
         if(result.hasErrors()){
             return "login/createMemberForm";
         }
-        //이메일 중복 불가
         List<Member> hasEmail = memberRepository.findByEmail(form.getEmail());
+        //이메일 중복 불가
         if(!hasEmail.isEmpty()){
             return "login/emailDuplicate";
         }
-
         Address address = new Address(form.getCity(), form.getStreet(),form.getZipcode());
 
         Member member = new Member();
@@ -57,11 +51,22 @@ public class HomeController {
         member.setAddress(address);
 
         memberService.join(member);
-        return "index";
+        return "login/login";
     }
 
     @GetMapping("/shopLogin")
     public String login(){
         return "login/login";
     }
+
+    @GetMapping("/")
+    public String home(){
+        return "home";
+    }
+
+    @GetMapping("/denied")
+    public String denied(){
+        return "login/denied";
+    }
+
 }
