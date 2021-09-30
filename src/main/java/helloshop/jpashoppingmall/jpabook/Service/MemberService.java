@@ -1,5 +1,6 @@
 package helloshop.jpashoppingmall.jpabook.Service;
 
+import helloshop.jpashoppingmall.jpabook.controller.MemberDTO;
 import helloshop.jpashoppingmall.jpabook.domain.Member;
 import helloshop.jpashoppingmall.jpabook.repository.MemberRepository;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,17 +30,20 @@ public class MemberService implements UserDetailsService {
     *회원가입
     */
     @Transactional
-    public Member join(Member member){
-        validateDuplicateMember(member);
-        return memberRepository.save(member);
+    public Member join(MemberDTO memberDTO){
+        validateDuplicateMember(memberDTO);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        memberDTO.setPasswd(passwordEncoder.encode(memberDTO.getPasswd()));
+        return memberRepository.save(memberDTO.toEntity());
     }
 
-    private void validateDuplicateMember(Member member) {
-        List<Member> findMembers = memberRepository.findByEmail(member.getEmail());
+    private void validateDuplicateMember(MemberDTO memberDTO) {
+        List<Member> findMembers = memberRepository.findByEmail(memberDTO.getEmail());
         if (!findMembers.isEmpty()){
             throw new IllegalStateException("이미 존재하는 회원 이메일 입니다.");
         }
     }
+
     /*
     *회원 전체 조회
     */

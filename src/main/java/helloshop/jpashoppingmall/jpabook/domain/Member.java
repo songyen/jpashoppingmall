@@ -1,5 +1,6 @@
 package helloshop.jpashoppingmall.jpabook.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,12 +10,15 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
+@Builder
 public class Member {
     @Id @GeneratedValue
     @Column(name="member_id")
     private Long id;
     @Column(unique = true)
     private String email;
+    @Column
+    private String passwd;
 
     @Embedded
     private Address address;

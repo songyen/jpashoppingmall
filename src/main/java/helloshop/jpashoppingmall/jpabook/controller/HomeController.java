@@ -30,15 +30,16 @@ public class HomeController {
 
     @GetMapping("/signUp")
     public String createForm(Model model){
-        model.addAttribute("memberForm",new MemberForm());
+        model.addAttribute("memberDTO",new MemberDTO());
         return "login/createMemberForm";
     }
 
     @PostMapping("/signUp")
-    public String create(@Valid MemberForm form, BindingResult result){
+    public String create(@Valid MemberDTO memberDTO, BindingResult result){
         if(result.hasErrors()){
             return "login/createMemberForm";
         }
+        /*
         List<Member> hasEmail = memberRepository.findByEmail(form.getEmail());
         //이메일 중복 불가
         if(!hasEmail.isEmpty()){
@@ -49,8 +50,9 @@ public class HomeController {
         Member member = new Member();
         member.setEmail(form.getEmail());
         member.setAddress(address);
+         */
 
-        memberService.join(member);
+        memberService.join(memberDTO);
         return "login/login";
     }
 
