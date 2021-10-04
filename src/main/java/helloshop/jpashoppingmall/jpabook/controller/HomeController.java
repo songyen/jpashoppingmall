@@ -11,21 +11,22 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @Slf4j
 @RequiredArgsConstructor
 public class HomeController {
     private final MemberService memberService;
-    private final MemberRepository memberRepository;
 
-    @GetMapping("/main")
+    @GetMapping("/")
     public String main(){
         return "index";
+    }
+
+    @GetMapping("/home")
+    public String home(){
+        return "home";
     }
 
     @GetMapping("/signUp")
@@ -61,10 +62,6 @@ public class HomeController {
         return "login/login";
     }
 
-    @GetMapping("/")
-    public String home(){
-        return "home";
-    }
 
     @GetMapping("/denied")
     public String denied(){
