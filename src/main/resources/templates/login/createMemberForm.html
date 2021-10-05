@@ -4,11 +4,11 @@
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader"/>
-    <form role="form" action="/signUp" th:object="${memberDTO}" method="post">
+    <form th:action="@{/signUp}" th:object="${memberDTO}" method="post">
         <div class="form-group">
             <label th:for="name">이메일</label>
             <input type="text" th:field="*{email}" class="form-control"
-                   placeholder="이메일을 입력하세요" th:class="${#fields.hasErrors('name')}? 'fieldError' : 'form-control'">
+                   placeholder="이메일을 입력하세요" th:class="${#fields.hasErrors('email')}? 'fieldError' : 'form-control'">
             <p th:if="${#fields.hasErrors('email')}"
                th:errors="*{email}">Incorrect date</p>
         </div>
@@ -32,6 +32,7 @@
             <input type="text" th:field="*{zipcode}" class="form-control"
                    placeholder="우편번호를 입력하세요">
         </div>
+        <br>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     <br/>

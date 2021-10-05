@@ -1,18 +1,22 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/header :: header">
   <title>Main</title>
+  <style>
+    h1 { color: blue;  text-align: center; }
+  </style>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 <div class="container">
   <div th:replace="fragments/bodyHeader :: bodyHeader" />
   <div class="jumbotron">
-    <h1>HELLO SHOP</h1>
-    <p class="lead">Welcome Our Shop, Please Sign Up Or Login</p>
-    <a class="btn btn-lg btn-info" sec:authorize="isAnonymous()" href="/signUp">회원 가입</a>
-    <a class="btn btn-lg btn-info" sec:authorize="isAnonymous()" href="/shopLogin}">로그인</a>
-    <a class="btn btn-lg btn-info"  sec:authorize="isAuthenticated()" href="/shopLogout}">로그아웃</a>
+    <h1>Welcome Our Shop</h1>
+    <h1>Please Sign Up Or Login</h1>
+    <br>
+    <a class="btn btn-lg btn-info" sec:authorize="isAnonymous()" href="signUp">회원 가입</a>
+    <a class="btn btn-lg btn-info" sec:authorize="isAnonymous()" href="shopLogin}">로그인</a>
+    <a class="btn btn-lg btn-info"  sec:authorize="isAuthenticated()" href="shopLogout}">로그아웃</a>
   </div>
   <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->

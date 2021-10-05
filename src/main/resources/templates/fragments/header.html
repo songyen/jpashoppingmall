@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="header">
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,5 +10,6 @@ ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
     <!-- Custom styles for this template -->
     <link href="/css/jumbotron-narrow.css" rel="stylesheet">
-    <title>Hello, world!</title>
+    <title>Welcome!</title>
+    <a class="btn btn-lg btn-info"  sec:authorize="isAuthenticated()" href="/shopLogout}">로그아웃</a>
 </head>

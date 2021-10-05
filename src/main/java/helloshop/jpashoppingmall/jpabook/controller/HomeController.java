@@ -1,9 +1,6 @@
 package helloshop.jpashoppingmall.jpabook.controller;
 
 import helloshop.jpashoppingmall.jpabook.Service.MemberService;
-import helloshop.jpashoppingmall.jpabook.domain.Address;
-import helloshop.jpashoppingmall.jpabook.domain.Member;
-import helloshop.jpashoppingmall.jpabook.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -19,51 +16,43 @@ import javax.validation.Valid;
 public class HomeController {
     private final MemberService memberService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String main(){
         return "index";
     }
 
-    @GetMapping("/home")
+    @GetMapping("home")
     public String home(){
         return "home";
     }
 
-    @GetMapping("/signUp")
+    @GetMapping("signUp")
     public String createForm(Model model){
         model.addAttribute("memberDTO",new MemberDTO());
         return "login/createMemberForm";
     }
 
-    @PostMapping("/signUp")
+    @PostMapping("signUp")
     public String create(@Valid MemberDTO memberDTO, BindingResult result){
         if(result.hasErrors()){
             return "login/createMemberForm";
         }
-        /*
-        List<Member> hasEmail = memberRepository.findByEmail(form.getEmail());
-        //이메일 중복 불가
-        if(!hasEmail.isEmpty()){
-            return "login/emailDuplicate";
-        }
-        Address address = new Address(form.getCity(), form.getStreet(),form.getZipcode());
-
-        Member member = new Member();
-        member.setEmail(form.getEmail());
-        member.setAddress(address);
-         */
-
         memberService.join(memberDTO);
         return "login/login";
     }
 
-    @GetMapping("/shopLogin")
+    @GetMapping("shopLogin")
     public String login(){
         return "login/login";
     }
 
+    // 로그인 결과 페이지
+    @GetMapping("loginSuccess")
+    public String loginResult() {
+        return "login/loginSuccess";
+    }
 
-    @GetMapping("/denied")
+    @GetMapping("denied")
     public String denied(){
         return "login/denied";
     }

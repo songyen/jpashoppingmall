@@ -10,16 +10,13 @@
     <div class="jumbotron">
         <h1>HELLO SHOP</h1>
             <a class="btn btn-lg btn-info"  sec:authorize="isAuthenticated()" href="/shopLogout}">로그아웃</a>
-        <p class="lead">User</p>
         <p>
             <a class="btn btn-lg btn-info" sec:authorize="hasRole('ROLE_USER')" href="/order">상품 주문</a>
             <a class="btn btn-lg btn-info" sec:authorize="hasRole('ROLE_USER')" href="/items">상품 목록</a>
         </p>
-        <p class="lead">Order List(For. User & Admin)</p>
         <p>
             <a class="btn btn-lg btn-secondary" sec:authorize="isAuthenticated()" href="/orders">주문 내역</a>
         </p>
-        <p class="lead">Admin</p>
         <p>
             <a class="btn btn-lg btn-dark" sec:authorize="hasRole('ROLE_ADMIN')" href="/members">회원 목록</a>
             <a class="btn btn-lg btn-dark" sec:authorize="hasRole('ROLE_ADMIN')" href="/items/new">상품 등록</a>
