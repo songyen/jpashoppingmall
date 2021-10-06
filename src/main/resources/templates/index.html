@@ -12,12 +12,11 @@
   <div th:replace="fragments/bodyHeader :: bodyHeader" />
   <div class="jumbotron">
     <h1>Welcome Our Shop</h1>
-    <h1>Please Sign Up Or Login</h1>
     <br>
     <a class="btn btn-lg btn-info" sec:authorize="isAnonymous()" href="signUp">회원 가입</a>
-    <a class="btn btn-lg btn-info" sec:authorize="isAnonymous()" href="shopLogin}">로그인</a>
-    <a class="btn btn-lg btn-info"  sec:authorize="isAuthenticated()" href="shopLogout}">로그아웃</a>
+    <a class="btn btn-lg btn-info" sec:authorize="isAnonymous()" href="shopLogin">로그인</a>
   </div>
+  <br>
   <div th:replace="fragments/footer :: footer" />
 </div> <!-- /container -->
 </body>

@@ -2,24 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/header :: header">
     <title>Hello</title>
+    <style>
+        h3 {text-align: right;}
+    </style>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
 <div class="container">
     <div th:replace="fragments/bodyHeader :: bodyHeader" />
     <div class="jumbotron">
-        <h1>HELLO SHOP</h1>
-            <a class="btn btn-lg btn-info"  sec:authorize="isAuthenticated()" href="/shopLogout}">로그아웃</a>
+        <h1> HELLO SHOP </h1>
+        <p>
+        <h3><span sec:authentication="name"></span>님 환영합니다~</h3>
+        </p>
+        <br>
         <p>
             <a class="btn btn-lg btn-info" sec:authorize="hasRole('ROLE_USER')" href="/order">상품 주문</a>
-            <a class="btn btn-lg btn-info" sec:authorize="hasRole('ROLE_USER')" href="/items">상품 목록</a>
         </p>
         <p>
-            <a class="btn btn-lg btn-secondary" sec:authorize="isAuthenticated()" href="/orders">주문 내역</a>
+            <a class="btn btn-lg btn-primary" sec:authorize="isAuthenticated()" href="/orders">주문 내역</a>
+            <a class="btn btn-lg btn-primary" sec:authorize="isAuthenticated()" href="/items">상품 목록</a>
         </p>
         <p>
-            <a class="btn btn-lg btn-dark" sec:authorize="hasRole('ROLE_ADMIN')" href="/members">회원 목록</a>
-            <a class="btn btn-lg btn-dark" sec:authorize="hasRole('ROLE_ADMIN')" href="/items/new">상품 등록</a>
+            <a class="btn btn-lg btn-secondary" sec:authorize="hasRole('ROLE_ADMIN')" href="/members">회원 목록</a>
+            <a class="btn btn-lg btn-info" sec:authorize="hasRole('ROLE_ADMIN')" href="/items/new">상품 등록</a>
         </p>
     </div>
     <div th:replace="fragments/footer :: footer" />

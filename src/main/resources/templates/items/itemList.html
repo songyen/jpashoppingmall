@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/header :: header" />
 <body>
 <div class="container">
@@ -22,7 +22,7 @@
                 <td th:text="${item.price}"></td>
                 <td th:text="${item.stockQuantity}"></td>
                 <td>
-                    <a href="#" th:href="@{/items/{id}/edit (id=${item.id})}"
+                    <a href="#" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/items/{id}/edit (id=${item.id})}"
                        class="btn btn-primary" role="button">수정</a>
                 </td>
             </tr>

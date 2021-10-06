@@ -6,8 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Controller
@@ -42,19 +41,7 @@ public class HomeController {
     }
 
     @GetMapping("shopLogin")
-    public String login(){
+    public String dispLogin(){
         return "login/login";
     }
-
-    // 로그인 결과 페이지
-    @GetMapping("loginSuccess")
-    public String loginResult() {
-        return "login/loginSuccess";
-    }
-
-    @GetMapping("denied")
-    public String denied(){
-        return "login/denied";
-    }
-
 }

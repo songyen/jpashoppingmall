@@ -8,6 +8,7 @@ import helloshop.jpashoppingmall.jpabook.domain.Member;
 import helloshop.jpashoppingmall.jpabook.domain.Order;
 import helloshop.jpashoppingmall.jpabook.repository.OrderSearch;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@Slf4j
 @RequiredArgsConstructor
 public class OrderController {
     private final OrderService orderService;
@@ -37,8 +39,8 @@ public class OrderController {
                         @RequestParam("itemId") Long itemId,
                         @RequestParam("count") int count){
         orderService.order(memberId,itemId,count);
-
-        return ("redirect:");
+        log.info("주문요청");
+        return ("redirect:../home");
     }
 
     @GetMapping("orders")
@@ -51,6 +53,6 @@ public class OrderController {
     @PostMapping("orders/{orderId}/cancel")
     public String cancelOrder(@PathVariable("orderId") Long orderId){
         orderService.cancelOrder(orderId);
-        return "redirect:../";
+        return "redirect:";
     }
 }

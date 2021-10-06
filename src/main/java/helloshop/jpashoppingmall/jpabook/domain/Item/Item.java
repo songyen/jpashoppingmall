@@ -1,7 +1,6 @@
 package helloshop.jpashoppingmall.jpabook.domain.Item;
 
 import helloshop.jpashoppingmall.jpabook.Exception.NotEnoughStockException;
-import helloshop.jpashoppingmall.jpabook.domain.Category;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,10 +18,6 @@ public abstract class Item {
     private String name;
     private int price;
     private int stockQuantity;
-
-    @ManyToOne
-    @JoinColumn(name="category_id")
-    private Category category;
 
     /*
     * stock증가

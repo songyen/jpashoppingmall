@@ -27,31 +27,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception{
         //static 디렉터리 하위 파일 목록은 인증 무시
-        web.ignoring().antMatchers("resources/static/**");
+        web.ignoring().antMatchers("/css/**", "/js/**");
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception{
         http.httpBasic().and().authorizeRequests()
                     // 페이지 권한 설정
+                    .antMatchers("/","/signUp","/shopLogin").permitAll()
                     .antMatchers("/members","/items/new").hasRole("ADMIN")
-                    .antMatchers("/order","/items").hasRole("USER")
-                    .antMatchers("/orders").authenticated()
-                    .antMatchers("/**").permitAll().and().csrf().disable();
+                    .antMatchers("/order").hasRole("USER")
+                    .anyRequest().authenticated();
 
         // 로그인 설정
         http.formLogin().loginPage("/shopLogin")
-                    .loginProcessingUrl("/login")
-                    .defaultSuccessUrl("/loginSuccess")
+                    .defaultSuccessUrl("/home")
                     .permitAll()
                 .and() // 로그아웃 설정
                     .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/shopLogout"))
                     .logoutSuccessUrl("/")
-                    .invalidateHttpSession(true)
-                .and()
-                    // 403 예외처리 핸들링
-                    .exceptionHandling().accessDeniedPage("/denied");
+                    .invalidateHttpSession(true).and().csrf().disable();
     }
 
     @Override

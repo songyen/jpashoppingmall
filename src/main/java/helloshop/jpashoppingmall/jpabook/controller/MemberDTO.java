@@ -2,7 +2,6 @@ package helloshop.jpashoppingmall.jpabook.controller;
 
 import helloshop.jpashoppingmall.jpabook.domain.Address;
 import helloshop.jpashoppingmall.jpabook.domain.Member;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
