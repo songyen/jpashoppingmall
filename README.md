@@ -1,22 +1,35 @@
 # JPA쇼핑몰사이트
 자바 ORM 표준 프로그래밍 - 기본편/실전편 실습
+
+## 프로젝트 개요
+회원, 상품, 주문 도메인 간의 프로세스를 고려해 Spring MVC패턴 기반 쇼핑몰 웹 서비스를 개발하며 Spring boot+JPA를 학습하였습니다.(ver2)
+
+Spring Security 로그인/로그아웃 기능을 추가했습니다.(ver3)
+
 ## 설계
 ### 도메인 설계
 
-<img width="1000" alt="도메인설계" src="https://user-images.githubusercontent.com/76679463/126803063-538fbee7-0e79-45d0-8fd0-232f171fb554.PNG">
+<img width="1000" alt="도메인설계" src="https://user-images.githubusercontent.com/76679463/136525868-a06d344a-54b9-4c18-afaa-c99ca1170c55.PNG">
+
 
 ## Preview
+### Main Page(ver2)
+<img width="1000" alt="mainUIv2" src="https://user-images.githubusercontent.com/76679463/135026124-4cba3131-55e0-40e2-b52e-ccf6d286fc96.png">
 
-### Main Page
-<img width="1000" alt="mainUI" src="https://user-images.githubusercontent.com/76679463/135026124-4cba3131-55e0-40e2-b52e-ccf6d286fc96.png">
+### Main Page(ver3)
+<img width="1000" alt="mainUIv3" src="https://user-images.githubusercontent.com/76679463/136526066-e0d0d39b-75cb-47eb-983d-521c9d62f7d1.PNG">
 
-### Sign up Page
-<img width="1000" alt="회원가입" src="https://user-images.githubusercontent.com/76679463/135026343-73fb75ab-5f98-4545-8d51-7d49969da975.png">
+#### (ADMIN/ MEMBER) 권한별로 보이는 기능을 구별
+
+* ADMIN (@jpashop.co.kr 도메인은 관리자로 구분)
+<img width="1000" alt="admin page" src="https://user-images.githubusercontent.com/76679463/136529102-f40f52a4-22d0-4bd5-aab0-187bdb65bb39.PNG">
+
+* MEMBER
+<img width="1000" alt="member page" src="https://user-images.githubusercontent.com/76679463/136528523-bf61b2a2-1d14-470f-b529-4d9e2c8b6216.PNG">
 
 
 ## 개발 기능
 * 회원 기능
-  * 회원 가입
   * 회원 목록
 * 상품 기능
   * 상품 등록
@@ -24,6 +37,9 @@
 * 주문 기능
   * 상품 주문
   * 주문 내역
+* 로그인 기능
+  * 로그인 / 로그아웃
+  * 회원가입
 
 ## 개발 환경
 * Gradle
