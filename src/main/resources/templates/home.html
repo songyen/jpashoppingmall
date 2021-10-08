@@ -24,8 +24,8 @@
             <a class="btn btn-lg btn-primary" sec:authorize="isAuthenticated()" href="/items">상품 목록</a>
         </p>
         <p>
-            <a class="btn btn-lg btn-secondary" sec:authorize="hasRole('ROLE_ADMIN')" href="/members">회원 목록</a>
-            <a class="btn btn-lg btn-info" sec:authorize="hasRole('ROLE_ADMIN')" href="/items/new">상품 등록</a>
+            <a class="btn btn-lg btn-secondary" sec:authorize="hasRole('ROLE_ADMIN')" href="/items/new">상품 등록</a>
+            <a class="btn btn-lg btn-dark" sec:authorize="hasRole('ROLE_ADMIN')" href="/members">회원 목록</a>
         </p>
     </div>
     <div th:replace="fragments/footer :: footer" />

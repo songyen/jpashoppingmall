@@ -40,7 +40,7 @@ public class OrderController {
                         @RequestParam("count") int count){
         orderService.order(memberId,itemId,count);
         log.info("주문요청");
-        return ("redirect:../home");
+        return ("redirect:/home");
     }
 
     @GetMapping("orders")
@@ -53,6 +53,6 @@ public class OrderController {
     @PostMapping("orders/{orderId}/cancel")
     public String cancelOrder(@PathVariable("orderId") Long orderId){
         orderService.cancelOrder(orderId);
-        return "redirect:";
+        return "redirect:../";
     }
 }
