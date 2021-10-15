@@ -37,7 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/","/signUp","/shopLogin").permitAll()
                     .antMatchers("/members","/items/new").hasRole("ADMIN")
                     .antMatchers("/order").hasRole("USER")
-                    .anyRequest().authenticated();
+                    .anyRequest().authenticated().and().csrf().ignoringAntMatchers("/orders/{orderId}/cancel");
+
 
         // 로그인 설정
         http.formLogin().loginPage("/shopLogin")
@@ -47,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/shopLogout"))
                     .logoutSuccessUrl("/")
-                    .invalidateHttpSession(true).and().csrf().disable();
+                    .invalidateHttpSession(true);
     }
 
     @Override

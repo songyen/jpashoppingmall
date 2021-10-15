@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:s="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/header :: header"/>
 <body>
 <div class="container">
@@ -56,11 +56,16 @@
     <div th:replace="fragments/footer :: footer"/>
 </div> <!-- /container -->
 </body>
-<script>
+<script type="text/javascript">
     function cancel(id) {
+        // var csrf = document.createElement("input");
+        // csrf.setAttribute("type","hidden");
+        // csrf.setAttribute("name","${_csrf.parameterName}");
+        // csrf.setAttribute("value","${_csrf.token}")
         var form = document.createElement("form");
         form.setAttribute("method", "post");
         form.setAttribute("action", "/orders/" + id + "/cancel");
+        // form.appendChild(csrf)
         document.body.appendChild(form);
         form.submit();
     }
