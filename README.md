@@ -2,9 +2,8 @@
 자바 ORM 표준 프로그래밍 - 기본편/실전편 실습
 
 ## 프로젝트 개요
-회원, 상품, 주문 도메인 간의 프로세스를 고려해 Spring MVC패턴 기반 쇼핑몰 웹 서비스를 개발하며 Spring boot+JPA를 학습하였습니다.(ver2)
+회원, 상품, 주문 도메인 간의 프로세스를 고려해 Spring MVC패턴 기반 쇼핑몰 웹 서비스를 개발하며 Spring boot+JPA를 학습하였습니다.
 
-Spring Security 로그인/로그아웃 기능을 추가했습니다.(ver3)
 
 ## 설계
 ### 도메인 설계
@@ -13,10 +12,7 @@ Spring Security 로그인/로그아웃 기능을 추가했습니다.(ver3)
 
 
 ## Preview
-### Main Page(ver2)
-<img width="1000" alt="mainUIv2" src="https://user-images.githubusercontent.com/76679463/135026124-4cba3131-55e0-40e2-b52e-ccf6d286fc96.png">
-
-### Main Page(ver3)
+### Main Page
 <img width="1000" alt="mainUIv3" src="https://user-images.githubusercontent.com/76679463/136526066-e0d0d39b-75cb-47eb-983d-521c9d62f7d1.PNG">
 
 #### (ADMIN/ MEMBER) 권한별로 보이는 기능을 구별
